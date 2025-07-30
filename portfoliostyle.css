@@ -1,0 +1,252 @@
+/* Basic Resets & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base font and line height for readability */
+body {
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif; /* Fallback if custom font not loaded */
+    /* Very dark, deep background for a premium feel */
+    background: linear-gradient(145deg, #080a09, #0e0d0e); /* Deep black to very dark gray gradient for depth */
+    color: #892323; /* Very light gray for primary text, ensuring maximum contrast */
+}
+
+/* Header Styling - Sleek and dark */
+header {
+    background: #1A1A1A; /* Consistent dark background for header */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9); /* Deeper, more pronounced shadow for a floating effect */
+    border-bottom-left-radius: 10px; /* Sleeker rounded corners */
+    border-bottom-right-radius: 10px;
+    padding: 1.25rem 1rem;
+}
+
+header h1 {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9); /* Stronger text shadow for prominence */
+    color: #0d0707; /* Pure white for main title */
+}
+
+header nav ul li a {    
+    padding: 8px 12px;
+    border-radius: 8px; /* Sleeker rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+    color: #CCCCCC; /* Muted light gray for nav links, good contrast */
+}
+
+header nav ul li a.active-nav {
+    background-color: rgba(255, 255, 255, 0.18); /* More prominent highlight for active page */
+    color: #FFFFFF; /* Pure white for active link */
+}
+
+header nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* More visible background on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+    color: #FFFFFF; /* Pure white on hover */
+}
+
+/* Main Content Section Styling - Darker, more defined sections */
+main section {
+    background-color: #1A1A1A; /* Darker background for sections, matching header */
+    border-radius: 12px; /* Sleeker rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Softer, larger shadow for depth */
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #282828; /* Very subtle border for definition */
+}
+
+main section:hover {
+    transform: translateY(-4px); /* Subtle lift on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+}
+
+/* About Section Specifics */
+#about h2 {
+    font-weight: 800;
+    color: #cbe21961; /* Pure white for main headings */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+#about p {
+    color: #150303; /* Very light text for paragraphs */
+}
+
+#about img {
+    border-color: #444444; /* Subtle dark border color for image */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Nicer shadow for photo */
+    transition: transform 0.3s ease;
+}
+
+#about img:hover {
+    transform: scale(1.03) rotate(1deg); /* Subtle zoom and rotation */
+}
+
+/* Skills Section Specifics */
+#skills h2 {
+    color: #0c110f; /* Consistent heading color */
+}
+
+.skill-card {
+    background-color: #282828; /* Darker background for skill cards */
+    color: #F5F5F5; /* Very light text for skill cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    border: 1px solid #3A3A3A; /* A subtle border for definition */
+    padding: 0.75rem 1.25rem;
+    border-radius: 15px; /* More rounded */
+}
+
+.skill-card:hover {
+    background-color: #3A3A3A; /* Slightly lighter dark hover color */
+    color: #FFFFFF; /* White text on hover */
+    transform: translateY(-2px) scale(1.01); /* Subtle pop out */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Projects Section Specifics */
+#projects h2 {
+    color: #0a0a0a; /* Consistent heading color */
+}
+
+.project-card {
+    background-color: #282828; /* Consistent dark background for project cards */
+    border: 1px solid #3A3A3A; /* Softer border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Lighter shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px; /* Slightly less rounded than sections */
+}
+
+.project-card:hover {
+    transform: translateY(-6px); /* More pronounced lift on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+}
+
+.project-card img {
+    border-radius: 6px; /* Rounded image corners within cards */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Subtle shadow for images */
+}
+
+.project-card h3 {
+    color: #FFFFFF; /* Lighter heading for readability */
+    font-weight: 600;
+}
+
+.project-card p {
+    color: #F5F5F5; /* Brighter text for project descriptions */
+}
+
+.project-link {
+    background-color: #4A4A4A; /* Neutral dark gray button color */
+    color: #FFFFFF; /* White text on button */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); /* Subtle button shadow */
+    border-radius: 6px; /* Slightly less rounded */
+}
+
+.project-link:hover {
+    background-color: #606060; /* Lighter gray on hover */
+    transform: translateY(-1px); /* Slight lift */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+}
+
+/* Contact Section Specifics */
+#contact h2 {
+    color: #080202; /* Consistent heading color */
+}
+
+#contact p {
+    color: #0f0202; /* Brighter text */
+}
+
+#contact form label {
+    color: #0f0303; /* Brighter label text */
+}
+
+#contact form input,
+#contact form textarea {
+    background-color: #282828; /* Darker input background */
+    color: #F5F5F5; /* Brighter input text */
+    border-color: #3A3A3A; /* Softer border color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border-radius: 8px; /* Rounded input fields */
+}
+
+#contact form input:focus,
+#contact form textarea:focus {
+    border-color: #606060; /* Focus border color */
+    box-shadow: 0 0 0 3px rgba(100, 100, 100, 0.5); /* Soft focus ring */
+    background-color: #1A1A1A; /* Slightly darker on focus */
+}
+
+#contact button[type="submit"] {
+    background-color: #4A4A4A; /* Neutral dark gray submit button color */
+    color: #FFFFFF; /* White text on button */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Button shadow */
+    border-radius: 8px;
+}
+
+#contact button[type="submit"]:hover {
+    background-color: #606060; /* Lighter gray on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.65); /* Stronger shadow */
+}
+
+/* Footer Styling - Sleek and dark */
+footer {
+    background: #1A1A1A; /* Matching header background */
+    border-top-left-radius: 10px; /* Sleeker rounded corners */
+    border-top-right-radius: 10px;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+footer p {
+    color: #A0A0A0; /* Lighter gray for footer text */
+}
+
+footer a {
+    color: #C0C0C0; /* Muted light gray for footer links */
+}
+
+footer a:hover {
+    color: #FFFFFF; /* White on hover */
+    text-decoration: underline;
+}
+
+/* General responsive adjustments */
+@media screen and (max-width: 767px) {
+    header {
+        padding: 1rem;
+    }
+    header h1 {
+        font-size: 1.75rem;
+    }
+    header nav ul {
+        align-items: center;
+    }
+    header nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+    header nav ul li a {
+        display: block;
+        padding: 8px;
+    }
+
+    main section {
+        padding: 1.25rem;
+    }
+
+    #about {
+        flex-direction: column;
+        text-align: center;
+    }
+    #about img {
+        margin-bottom: 1rem;
+    }
+
+    #projects .grid {
+        grid-template-columns: 1fr;
+    }
+}
