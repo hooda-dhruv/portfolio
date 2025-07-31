@@ -1,52 +1,105 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #df646400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern font */
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); /* Gradient background */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: black;
+  min-height: 100vh; /* Use min-height for better flexibility */
+  margin: 0; /* Remove default body margin */
 }
 
 .calculator {
-  background: rgb(28, 9, 9);
+  background: #2a2a2a; /* Darker calculator background */
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #ccc;
-  width: 300px;
+  border-radius: 15px; /* More rounded corners */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stronger, more defined shadow */
+  width: 320px; /* Slightly wider */
+  border: 1px solid #444; /* Subtle border */
 }
 
 #display {
-  width: 100%;
-  height: 50px;
-  font-size: 24px;
+  width: calc(100% - 20px); /* Adjust width for padding */
+  height: 60px; /* Taller display */
+  font-size: 32px; /* Larger font */
   text-align: right;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* More space below display */
   padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border: none; /* No border for a cleaner look */
+  border-radius: 8px; /* Rounded corners for display */
+  background: #1a1a1a; /* Even darker display background */
+  color: #e0e0e0; /* Light text color for contrast */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7); /* Inner shadow for depth */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for long results */
 }
 
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 12px; /* Slightly larger gap between buttons */
 }
 
 button {
-  padding: 15px;
-  font-size: 18px;
+  padding: 18px; /* More padding for larger buttons */
+  font-size: 22px; /* Larger font size for button text */
   border: none;
-  border-radius: 5px;
-  background: #f0f0f0;
+  border-radius: 10px; /* More rounded buttons */
+  background: #444444; /* Darker button background */
+  color: #ffffff; /* White text on buttons */
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.2s ease-in-out; /* Smoother transition for all properties */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Button shadow */
 }
 
 button:hover {
-  background: #dcdcdc;
+  background: #5a5a5a; /* Lighter on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+}
+
+button:active {
+  background: #3a3a3a; /* Even darker when clicked */
+  transform: translateY(0); /* Return to original position */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Smaller shadow when active */
+}
+
+/* Specific button styles */
+button.clear {
+  background: #d9534f; /* Red for clear button */
+}
+
+button.clear:hover {
+  background: #c9302c;
+}
+
+button.operator {
+  background: #f0ad4e; /* Orange for operators */
+  color: #333; /* Dark text for operators */
+}
+
+button.operator:hover {
+  background: #ec971f;
+}
+
+.equals {
+  grid-column: span 2;
+  background: #5cb85c; /* Green for equals button */
+  font-weight: bold; /* Bold text for equals */
+}
+
+.equals:hover {
+  background: #4cae4c;
 }
 
 .zero {
   grid-column: span 2;
+}
+
+/* Optional: Make number buttons slightly different */
+button:not(.operator):not(.equals):not(.clear) {
+    background: #666; /* Slightly lighter gray for number buttons */
+}
+
+button:not(.operator):not(.equals):not(.clear):hover {
+    background: #777;
 }
