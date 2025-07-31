@@ -5,229 +5,481 @@
     box-sizing: border-box;
 }
 
-/* Base font and line height for readability */
-body {
-    line-height: 1.6;
-    font-family: 'Inter', sans-serif; /* Fallback if custom font not loaded */
-    /* Very dark, deep background for a premium feel */
-    background: linear-gradient(145deg, #080a09, #0e0d0e); /* Deep black to very dark gray gradient for depth */
-    color: #892323; /* Very light gray for primary text, ensuring maximum contrast */
+/* Define CSS Variables for the Precise Dark Theme with Gradients */
+:root {
+    /* Backgrounds */
+    --color-bg-primary: #0A0D2A; /* Deeper blue-purple for body */
+    --color-bg-secondary: #171A3F; /* Slightly lighter for header/main sections, cards */
+    --color-bg-tertiary: #2C2F55; /* Lighter still for interactive elements, inputs */
+
+    /* Text Colors */
+    --color-text-light: #F0F2FF; /* Very light off-white with blue tint */
+    --color-text-muted: #B8BEDD; /* Muted gray-blue for secondary text/labels */
+
+    /* Gradient Colors (for headings and primary buttons) */
+    --gradient-hero-start: #E6007A; /* Deep Pink for Hero */
+    --gradient-hero-end: #6600FF;  /* Deep Purple for Hero */
+
+    --gradient-section-start: #FF00FF; /* Vibrant Pink for general sections */
+    --gradient-section-end: #00FFFF; /* Vibrant Cyan for general sections */
+
+    --button-gradient-start: #FC466B; /* Button Pink */
+    --button-gradient-end: #3F5EFB; /* Button Blue */
+
+    /* Borders & Shadows */
+    --color-border-subtle: rgba(255, 255, 255, 0.08); /* Very subtle white border */
+    --shadow-soft: rgba(0, 0, 0, 0.3); /* Softer, spread-out shadow */
+    --shadow-deep: rgba(0, 0, 0, 0.6); /* Deeper shadow for elevation */
 }
 
-/* Header Styling - Sleek and dark */
+body {
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    background: var(--color-bg-primary);
+    color: var(--color-text-light);
+    
+    /* Subtle background gradient for overall depth, mimicking the provided images */
+    background: radial-gradient(at 10% 20%, rgba(255,0,255,0.1) 0%, transparent 40%), /* Pinkish glow top-left */
+                radial-gradient(at 90% 80%, rgba(0,255,255,0.1) 0%, transparent 40%), /* Cyan glow bottom-right */
+                linear-gradient(135deg, var(--color-bg-primary) 0%, #080B26 100%); /* Deeper primary gradient */
+    background-attachment: fixed; /* Keep background fixed during scroll */
+    overflow-x: hidden; /* Prevent horizontal scroll due to absolute positioning */
+}
+
+/* Reusable Gradient Text Class (as a set of properties, not a true mixin) */
+.gradient-text-properties {
+    background: linear-gradient(90deg, var(--gradient-section-start), var(--gradient-section-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback for non-webkit browsers */
+}
+
+/* Header Styling */
 header {
-    background: #1A1A1A; /* Consistent dark background for header */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9); /* Deeper, more pronounced shadow for a floating effect */
-    border-bottom-left-radius: 10px; /* Sleeker rounded corners */
-    border-bottom-right-radius: 10px;
-    padding: 1.25rem 1rem;
+    background: var(--color-bg-secondary);
+    box-shadow: 0 4px 15px var(--shadow-deep);
+    border-bottom-left-radius: 12px; /* More pronounced rounding */
+    border-bottom-right-radius: 12px;
+    padding: 1rem 1.5rem;
+    color: var(--color-text-light);
+    border-bottom: 1px solid var(--color-border-subtle);
+    display: flex; /* Use flex to align its children (the container div) */
+    justify-content: center; /* Center the container div */
+    align-items: center;
+}
+
+/* Style the inner container within the header to achieve left-logo, right-nav */
+header .container {
+    max-width: 1200px; /* Limit the width of the content inside header */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    display: flex;
+    flex-direction: column; /* Default for mobile (stacked) */
+    align-items: center; /* Center items for mobile (h1 and nav) */
+    justify-content: center; /* Center the group for mobile */
 }
 
 header h1 {
     font-weight: 700;
-    letter-spacing: 0.05em;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9); /* Stronger text shadow for prominence */
-    color: #0d0707; /* Pure white for main title */
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3), 0 0 10px rgba(255, 0, 255, 0.3);
+    color: var(--color-text-light);
+    font-size: 2rem; /* Adjusted header title size */
+}
+
+header nav ul {
+    display: flex; /* Ensure nav links are in a row */
+    gap: 1.5rem; /* Space between nav links */
+    list-style: none; /* REMOVE BULLET POINTS */
+    margin: 0; /* Ensure no default margin from ul */
+    padding: 0; /* Ensure no default padding from ul */
 }
 
 header nav ul li a {    
-    padding: 8px 12px;
-    border-radius: 8px; /* Sleeker rounded corners */
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
-    color: #CCCCCC; /* Muted light gray for nav links, good contrast */
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-decoration: none; /* Remove underline */
 }
 
-header nav ul li a.active-nav {
-    background-color: rgba(255, 255, 255, 0.18); /* More prominent highlight for active page */
-    color: #FFFFFF; /* Pure white for active link */
-}
-
+header nav ul li a.active-nav,
 header nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* More visible background on hover */
-    transform: translateY(-1px); /* Slight lift effect */
-    color: #FFFFFF; /* Pure white on hover */
+    color: var(--color-text-light);
+    background-color: var(--color-bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px var(--shadow-soft);
 }
 
-/* Main Content Section Styling - Darker, more defined sections */
+/* Main Content Area Styling */
+main {
+    padding-top: 2rem; /* Add some top padding to main content */
+}
+
 main section {
-    background-color: #1A1A1A; /* Darker background for sections, matching header */
-    border-radius: 12px; /* Sleeker rounded corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Softer, larger shadow for depth */
-    padding: 2rem;
-    margin-bottom: 2.5rem;
+    background-color: var(--color-bg-secondary);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px var(--shadow-deep);
+    padding: 3rem;
+    margin-bottom: 3.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #282828; /* Very subtle border for definition */
+    border: 1px solid var(--color-border-subtle);
 }
 
 main section:hover {
-    transform: translateY(-4px); /* Subtle lift on hover */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px var(--shadow-deep);
 }
 
-/* About Section Specifics */
-#about h2 {
+/* General Headings within sections (for Skills, Projects, Contact) */
+main section h2 {
+    font-size: 2.8rem;
     font-weight: 800;
-    color: #cbe21961; /* Pure white for main headings */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: 0.02em;
+    /* Apply the general gradient text style */
+    background: linear-gradient(90deg, var(--gradient-section-start), var(--gradient-section-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.2), 0 0 20px rgba(0, 255, 255, 0.2);
 }
 
-#about p {
-    color: #150303; /* Very light text for paragraphs */
+/* About Section (Hero Section) Specific Styling */
+#about.hero-section {
+    background: linear-gradient(135deg, #10133A 0%, #1E214D 100%); /* Deeper background for hero */
+    padding: 6rem 3rem; /* More vertical padding for hero */
+    border-radius: 0; /* No rounded corners for hero section, typically full width */
+    box-shadow: none; /* Remove section shadow from hero */
+    border: none; /* Remove border from hero */
+    min-height: 70vh; /* Ensure it takes up a good portion of the viewport */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Essential for absolute positioning of elements inside */
+    overflow: hidden; /* Crucial for clipping the image correctly */
 }
 
-#about img {
-    border-color: #444444; /* Subtle dark border color for image */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* Nicer shadow for photo */
-    transition: transform 0.3s ease;
+/* Container for text and image to maintain max-width */
+#about .container {
+    max-width: 1200px; /* Limit width for content */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    align-items: center;
+    justify-content: space-between; /* To push text left and image right on desktop */
+    position: relative; /* Make it a positioning context for z-index */
+    z-index: 10; /* Ensure content is above background elements */
 }
 
-#about img:hover {
-    transform: scale(1.03) rotate(1deg); /* Subtle zoom and rotation */
+#about .text-content {
+    flex: 1; /* Allow text content to take available space */
+    padding-right: 2rem; /* Space between text and image */
+    max-width: 65%; /* Constrain text width as in example */
 }
+
+#about .hero-heading {
+    font-size: 5rem; /* Large font size */
+    line-height: 1.1; /* Tight line height */
+    font-weight: 900; /* Extra bold */
+    text-transform: uppercase; /* Uppercase as in example */
+    margin-bottom: 1rem;
+    text-align: left; /* Align text left within its container */
+    /* Apply specific hero gradient */
+    background: linear-gradient(90deg, var(--gradient-hero-start), var(--gradient-hero-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 30px rgba(102, 0, 255, 0.4); /* Stronger glow */
+}
+
+#about .hero-subtext {
+    font-size: 1.25rem; /* Larger subtext */
+    color: var(--color-text-muted);
+    max-width: 600px; /* Limit width of subtext */
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+#about .hero-button {
+    background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-end));
+    color: var(--color-text-light);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; /* Ensure padding works */
+    padding: 0.75rem 2rem; /* Standard button padding */
+    border-radius: 8px; /* Standard button border-radius */
+}
+
+#about .hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+#about .image-container {
+    flex-shrink: 0;
+    width: 450px; /* Slightly larger image for more presence and overlap */
+    height: 450px; /* Keep aspect ratio square */
+    position: absolute; /* Absolute position to overlap */
+    right: -100px; /* Adjust this value to push more or less off-screen */
+    bottom: -80px; /* Adjust this value to push more or less off-screen from bottom */
+    z-index: 5; /* Ensure image is behind text but above hero background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255,0,255,0.2), 0 0 60px rgba(0,255,255,0.2);
+}
+
+#about .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    filter: grayscale(10%) brightness(105%);
+}
+
+/* Subtle background elements for hero section (simulated code/abstract shapes) */
+#about.hero-section::before,
+#about.hero-section::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.03); /* Very subtle light rectangle */
+    opacity: 0.5;
+    z-index: 1; /* Behind content, above hero background */
+    pointer-events: none; /* Ensure it doesn't block interactions */
+}
+
+#about.hero-section::before {
+    width: 280px; /* Larger */
+    height: 160px;
+    top: 10%; /* Move up */
+    left: 45%; /* Move right */
+    border-radius: 10px;
+    transform: rotate(-20deg); /* Adjust rotation */
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.05), rgba(0, 255, 255, 0.05)); /* Subtle gradient */
+}
+
+#about.hero-section::after {
+    width: 200px; /* Larger */
+    height: 130px;
+    bottom: 15%; /* Move up */
+    left: 25%; /* Move right */
+    border-radius: 15px;
+    transform: rotate(30deg); /* Adjust rotation */
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05)); /* Subtle gradient */
+}
+
 
 /* Skills Section Specifics */
-#skills h2 {
-    color: #0c110f; /* Consistent heading color */
-}
-
 .skill-card {
-    background-color: #282828; /* Darker background for skill cards */
-    color: #F5F5F5; /* Very light text for skill cards */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-    border: 1px solid #3A3A3A; /* A subtle border for definition */
-    padding: 0.75rem 1.25rem;
-    border-radius: 15px; /* More rounded */
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-light);
+    box-shadow: 0 3px 10px var(--shadow-soft);
+    border: 1px solid var(--color-border-subtle);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-card:hover {
-    background-color: #3A3A3A; /* Slightly lighter dark hover color */
-    color: #FFFFFF; /* White text on hover */
-    transform: translateY(-2px) scale(1.01); /* Subtle pop out */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+    border-color: var(--gradient-section-end);
 }
 
 /* Projects Section Specifics */
-#projects h2 {
-    color: #0a0a0a; /* Consistent heading color */
-}
-
 .project-card {
-    background-color: #282828; /* Consistent dark background for project cards */
-    border: 1px solid #3A3A3A; /* Softer border */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Lighter shadow */
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 6px 20px var(--shadow-deep);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px; /* Slightly less rounded than sections */
+    border-radius: 14px;
+    padding: 1.5rem;
 }
 
 .project-card:hover {
-    transform: translateY(-6px); /* More pronounced lift on hover */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7); /* Stronger shadow on hover */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px var(--shadow-deep);
+    border-color: var(--gradient-section-start);
 }
 
 .project-card img {
-    border-radius: 6px; /* Rounded image corners within cards */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Subtle shadow for images */
+    border-radius: 8px;
+    box-shadow: 0 3px 10px var(--shadow-soft);
+    object-fit: cover;
 }
 
 .project-card h3 {
-    color: #FFFFFF; /* Lighter heading for readability */
+    color: var(--color-text-light);
     font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 1rem;
 }
 
 .project-card p {
-    color: #F5F5F5; /* Brighter text for project descriptions */
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .project-link {
-    background-color: #4A4A4A; /* Neutral dark gray button color */
-    color: #FFFFFF; /* White text on button */
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); /* Subtle button shadow */
-    border-radius: 6px; /* Slightly less rounded */
+    background: var(--color-bg-secondary);
+    color: var(--color-text-light);
+    box-shadow: 0 2px 8px var(--shadow-soft);
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    display: inline-block;
+    border: 1px solid var(--color-border-subtle);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    font-weight: 500;
 }
 
 .project-link:hover {
-    background-color: #606060; /* Lighter gray on hover */
-    transform: translateY(-1px); /* Slight lift */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+    background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-end));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-deep);
+    border-color: transparent;
 }
 
 /* Contact Section Specifics */
 #contact h2 {
-    color: #080202; /* Consistent heading color */
+    /* Direct application of gradient text properties */
+    background: linear-gradient(90deg, var(--gradient-section-start), var(--gradient-section-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.2), 0 0 20px rgba(0, 255, 255, 0.2);
 }
 
 #contact p {
-    color: #0f0202; /* Brighter text */
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
 }
 
 #contact form label {
-    color: #0f0303; /* Brighter label text */
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
 #contact form input,
 #contact form textarea {
-    background-color: #282828; /* Darker input background */
-    color: #F5F5F5; /* Brighter input text */
-    border-color: #3A3A3A; /* Softer border color */
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border-subtle);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    border-radius: 8px; /* Rounded input fields */
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
 }
 
 #contact form input:focus,
 #contact form textarea:focus {
-    border-color: #606060; /* Focus border color */
-    box-shadow: 0 0 0 3px rgba(100, 100, 100, 0.5); /* Soft focus ring */
-    background-color: #1A1A1A; /* Slightly darker on focus */
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(63, 94, 251, 0.4);
+    background-color: var(--color-bg-secondary);
 }
 
 #contact button[type="submit"] {
-    background-color: #4A4A4A; /* Neutral dark gray submit button color */
-    color: #FFFFFF; /* White text on button */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Button shadow */
-    border-radius: 8px;
+    background: linear-gradient(90deg, var(--button-gradient-start), var(--button-gradient-end));
+    color: var(--color-text-light);
+    box-shadow: 0 6px 15px var(--shadow-deep);
+    border-radius: 10px;
+    padding: 0.8rem 2rem;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 #contact button[type="submit"]:hover {
-    background-color: #606060; /* Lighter gray on hover */
-    transform: translateY(-2px); /* Slight lift */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.65); /* Stronger shadow */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--shadow-deep);
+    opacity: 0.95;
 }
 
-/* Footer Styling - Sleek and dark */
+/* Footer Styling */
 footer {
-    background: #1A1A1A; /* Matching header background */
-    border-top-left-radius: 10px; /* Sleeker rounded corners */
-    border-top-right-radius: 10px;
-    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+    background: var(--color-bg-secondary);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    box-shadow: inset 0 4px 10px var(--shadow-deep);
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border-subtle);
+    padding: 1.5rem;
+    text-align: center; /* CENTER ALIGN ALL FOOTER CONTENT */
+    max-width: 1200px; /* Match main content width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 footer p {
-    color: #A0A0A0; /* Lighter gray for footer text */
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem; /* Add some space below copyright */
+}
+
+footer div { /* Target the div containing social links */
+    display: flex; /* Make it a flex container */
+    justify-content: center; /* Center the social links */
+    gap: 1.5rem; /* Space between links */
 }
 
 footer a {
-    color: #C0C0C0; /* Muted light gray for footer links */
-}
-
-footer a:hover {
-    color: #FFFFFF; /* White on hover */
-    text-decoration: underline;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-decoration: none; /* Ensure no underline */
 }
 
 /* General responsive adjustments */
+@media screen and (min-width: 768px) {
+    /* Header: "Dhruv Hooda" left, navigation right */
+    header .container {
+        flex-direction: row; /* Make items horizontal on desktop */
+        justify-content: space-between; /* Spread items (h1 left, nav right) */
+    }
+    header h1 {
+        margin-right: 0; /* Remove any margin that might push it when space-between is on container */
+    }
+
+    /* About Section (Hero) specific desktop adjustments */
+    #about .hero-heading {
+        font-size: 5rem; /* Ensure large size on desktop */
+    }
+    #about .image-container {
+        width: 400px; /* Desktop specific image size */
+        height: 400px;
+        right: -80px; /* Position further off-screen on desktop */
+        bottom: -50px; /* Adjust bottom for desktop */
+        transform: translateY(0); /* Ensure no unwanted transform */
+    }
+}
+
 @media screen and (max-width: 767px) {
     header {
+        flex-direction: column;
+        text-align: center;
         padding: 1rem;
     }
     header h1 {
         font-size: 1.75rem;
+        margin-bottom: 1rem;
     }
     header nav ul {
-        align-items: center;
-    }
-    header nav ul li {
+        flex-direction: column;
+        gap: 0.5rem;
         width: 100%;
-        text-align: center;
     }
     header nav ul li a {
         display: block;
@@ -235,15 +487,63 @@ footer a:hover {
     }
 
     main section {
-        padding: 1.25rem;
+        padding: 1.5rem;
     }
 
-    #about {
-        flex-direction: column;
+    /* Hero section on small screens */
+    #about.hero-section {
+        padding: 4rem 1.5rem;
+        min-height: auto; /* Allow height to adjust */
+        flex-direction: column; /* Stack elements */
         text-align: center;
     }
-    #about img {
-        margin-bottom: 1rem;
+
+    #about .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #about .text-content {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 2rem; /* Space before image */
+        max-width: 100%; /* Allow text to take full width */
+    }
+
+    #about .hero-heading {
+        font-size: 2.5rem; /* Adjust for mobile */
+        text-align: center;
+    }
+
+    #about .hero-subtext {
+        font-size: 1rem;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    #about .hero-button {
+        padding: 0.6rem 1.5rem; /* Adjust button padding for mobile */
+    }
+
+    #about .image-container {
+        position: relative; /* Back to relative positioning on mobile */
+        width: 200px; /* Smaller image on mobile */
+        height: 200px;
+        right: auto;
+        bottom: auto;
+        transform: none; /* Remove translation */
+        margin: 0 auto; /* Center image */
+        box-shadow: 0 0 20px rgba(255,0,255,0.1), 0 0 40px rgba(0,255,255,0.1);
+    }
+    
+    /* Hide the pseudo-elements on smaller screens if they become intrusive */
+    #about.hero-section::before,
+    #about.hero-section::after {
+        display: none;
+    }
+
+    main section h2 {
+        font-size: 2rem;
     }
 
     #projects .grid {
